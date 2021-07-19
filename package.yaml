@@ -1,0 +1,57 @@
+name: advent2020
+
+dependencies:
+  - base
+  - text
+  - megaparsec >= 9.0
+  - containers
+  - template-haskell
+  - formatting
+  - foldl
+  - lens
+  - mtl
+  - tardis
+  - streams
+  - comonad
+  - semigroupoids
+  - unordered-containers
+  - array
+  - lattices
+  - strict
+  - generic-data
+  - hashable
+
+executable:
+  main: Main.hs
+  source-dirs: src
+
+ghc-options:
+  -Wno-partial-type-signatures -Wtype-defaults -rtsopts -O2
+
+default-extensions:
+  - OverloadedStrings
+  - RankNTypes
+  - ViewPatterns
+  - RecordWildCards
+  - LambdaCase
+  - TupleSections
+  - GADTs
+  - FlexibleContexts
+  - TypeApplications
+  - ScopedTypeVariables
+  - NoMonomorphismRestriction
+  - PartialTypeSignatures
+  - AllowAmbiguousTypes
+  - QuantifiedConstraints
+  - GeneralizedNewtypeDeriving
+  - TemplateHaskell
+  - DeriveFunctor
+  - FlexibleInstances
+  - RecursiveDo
+  - LiberalTypeSynonyms
+  - StandaloneDeriving
+  - DerivingVia
+  - BangPatterns
+  - DeriveGeneric
+  - TypeOperators
+  - NumericUnderscores
