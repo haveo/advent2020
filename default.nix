@@ -3,13 +3,20 @@ let
   hp = pkgs.haskellPackages;
 in with pkgs.haskell.lib; hp.developPackage {
   root = ./.;
-  modifier = drv: drv // {
-    envFunc = _: hp.shellFor {
-      withHoogle = true;
-      packages = p: [ drv ];
-      buildInputs = with hp; [cabal-install ghcid hp.hpack brittany pkgs.daemon];
-    };
-  };
+  modifier = drv:
+    let
+      addHook = d: overrideCabal d (_: {
+        shellHook =
+          ''
+            daemon --name=hoogle -- hoogle server --local
+            function finish {
+              daemon -n hoogle --signal SIGTERM;
+            }
+            trap finish EXIT
+          '';
+      });
+      addTools = d:
+        addBuildTools d
+          (with hp; [cabal-install ghcid brittany pkgs.daemon hp.hpack]);
+    in addTools (addHook drv);
 }
-
-# TODO: run hoogle server automatically
